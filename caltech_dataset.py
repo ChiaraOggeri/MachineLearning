@@ -19,8 +19,38 @@ class Caltech(VisionDataset):
         super(Caltech, self).__init__(root, transform=transform, target_transform=target_transform)
 
         self.split = split # This defines the split you are going to use
-                           # (split files are called 'train.txt' and 'test.txt')
-
+         
+          # (split files are called 'train.txt' and 'test.txt')
+        label=0
+        curlab=""
+        self.images=[]
+        if(self.split=='train')
+           f=open(train, 'rb')
+           lines= f.readlines()
+           for line in lines:
+               parts=line.split('/')
+               if curlab=""
+                   curlab=parts[0]
+                else:
+                    if curlab!=pars[0]:
+                        label=label+1
+                        curlab=pars[0]
+                selfe.images.append(pil_loader(line),label)
+         else:
+              f=open(train, 'rb')
+           lines= f.readlines()
+           for line in lines:
+               parts=line.split('/')
+               if curlab=""
+                   curlab=parts[0]
+                else:
+                    if curlab!=pars[0]:
+                        label=label+1
+                        curlab=pars[0]
+                selfe.images.append(pil_loader(line),label)
+            print(self.images.size())
+            
+       
         '''
         - Here you should implement the logic for reading the splits files and accessing elements
         - If the RAM size allows it, it is faster to store all data in memory
@@ -40,7 +70,7 @@ class Caltech(VisionDataset):
             tuple: (sample, target) where target is class_index of the target class.
         '''
 
-        image, label = ... # Provide a way to access image and label via index
+        image, label = self.images[index] # Provide a way to access image and label via index
                            # Image should be a PIL Image
                            # label can be int
 
@@ -55,5 +85,5 @@ class Caltech(VisionDataset):
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
         '''
-        length = ... # Provide a way to get the length (number of elements) of the dataset
+        length = self.images.size() # Provide a way to get the length (number of elements) of the dataset
         return length
