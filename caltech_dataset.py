@@ -50,7 +50,8 @@ class Caltech(VisionDataset):
                 selfe.images.append(pil_loader(line),label)
             print(self.images.size())
             
-       
+     
+  
         '''
         - Here you should implement the logic for reading the splits files and accessing elements
         - If the RAM size allows it, it is faster to store all data in memory
@@ -60,6 +61,24 @@ class Caltech(VisionDataset):
         - Labels should start from 0, so for Caltech you will have lables 0...100 (excluding the background class) 
         '''
 
+    def __makesplit__(self):
+        self.trainsplit=[]
+        self.validsplit=[]
+        count=0
+        for i in range(0,self.images.size())
+            if count<2:
+                self.trainsplit.append(i)
+                count+=1
+            else:
+                self.validsplit.append(i)
+                count=0
+    def __trainsplit__(self):
+        retrun self.trainsplit
+        
+       
+    def __validsplit__(self):
+        return self.validsplit
+        
     def __getitem__(self, index):
         '''
         __getitem__ should access an element through its index
