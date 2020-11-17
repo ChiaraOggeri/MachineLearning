@@ -25,8 +25,8 @@ class Caltech(VisionDataset):
         curlab=""
         self.images=[]
         if(self.split=='train'):
-         # /MachineLearning/train.txt
-           f=open("/MachineLearning/train.txt", 'rb')
+        
+           f=open("MachineLearning/train.txt", 'rb')
            lines= f.readlines()
            for line in lines:
               parts=line.split('/')
@@ -38,7 +38,7 @@ class Caltech(VisionDataset):
                         curlab=pars[0]
               selfe.images.append(pil_loader(line),label)
         else:
-           f=open("/MachineLearning/test.txt", 'rb')
+           f=open("MachineLearning/test.txt", 'rb')
            lines= f.readlines()
            for line in lines:
                parts=line.split('/')
