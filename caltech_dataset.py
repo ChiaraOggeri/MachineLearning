@@ -24,31 +24,32 @@ class Caltech(VisionDataset):
         label=0
         curlab=""
         self.images=[]
-        if(self.split=='train')
-           f=open(train, 'rb')
+        if(self.split=='train'):
+         # /MachineLearning/train.txt
+           f=open("/MachineLearning/train.txt", 'rb')
            lines= f.readlines()
            for line in lines:
-               parts=line.split('/')
-               if curlab=""
+              parts=line.split('/')
+              if curlab=="":
                    curlab=parts[0]
-                else:
+              else:
                     if curlab!=pars[0]:
                         label=label+1
                         curlab=pars[0]
-                selfe.images.append(pil_loader(line),label)
-         else:
-              f=open(train, 'rb')
+              selfe.images.append(pil_loader(line),label)
+        else:
+           f=open("/MachineLearning/test.txt", 'rb')
            lines= f.readlines()
            for line in lines:
                parts=line.split('/')
-               if curlab=""
+               if curlab=="":
                    curlab=parts[0]
-                else:
+               else:
                     if curlab!=pars[0]:
                         label=label+1
                         curlab=pars[0]
-                selfe.images.append(pil_loader(line),label)
-            print(self.images.size())
+               selfe.images.append(pil_loader(line),label)
+        print(self.images.size())
             
      
   
@@ -65,7 +66,7 @@ class Caltech(VisionDataset):
         self.trainsplit=[]
         self.validsplit=[]
         count=0
-        for i in range(0,self.images.size())
+        for i in range(0,self.images.size()):
             if count<2:
                 self.trainsplit.append(i)
                 count+=1
@@ -73,7 +74,7 @@ class Caltech(VisionDataset):
                 self.validsplit.append(i)
                 count=0
     def __trainsplit__(self):
-        retrun self.trainsplit
+        return self.trainsplit
         
        
     def __validsplit__(self):
@@ -104,5 +105,5 @@ class Caltech(VisionDataset):
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
         '''
-        length = self.images.size() # Provide a way to get the length (number of elements) of the dataset
+        length = self.images.length() # Provide a way to get the length (number of elements) of the dataset
         return length
