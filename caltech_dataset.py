@@ -14,30 +14,31 @@ def pil_loader(path):
         return img.convert('RGB')
 
 
+
 class Caltech(VisionDataset):
-    def __init__(self, root, split='train', transform=None, target_transform=None):
+     def __init__(self, root, split='train', transform=None, target_transform=None):
         super(Caltech, self).__init__(root, transform=transform, target_transform=target_transform)
 
         self.split = split # This defines the split you are going to use
          
-     label=0
+        label=0
         curlab=""
         self.images=[]
         self.labels=[]
         if(self.split=='train'):
         
-           f=open('MachineLearning/train.txt','rb')
+           f=open('MachineLearning/train.txt')
            lines= f.readlines()
            for line in lines:
               parts=line.split('/')
               if curlab=="":
                    curlab=parts[0]
               else:
-                    if curlab!=pars[0]:
+                    if curlab!=parts[0]:
                         label=label+1
-                        curlab=pars[0]
+                        curlab=parts[0]
               line1=line.split('\n')
-              path1=roo+"/"+line1[0]
+              path1=root+"/"+line1[0]
               self.images.append(pil_loader(path1))
               self.labels.append(label)
         else:
@@ -48,11 +49,15 @@ class Caltech(VisionDataset):
                if curlab=="":
                    curlab=parts[0]
                else:
-                    if curlab!=pars[0]:
+                    if curlab!=parts[0]:
                         label=label+1
-                        curlab=pars[0]
-               selfe.images.append(pil_loader(line),label)
-        print(self.images.size())
+                        curlab=parts[0]
+               line1=line.split('\n')
+               path1=root+"/"+line1[0]
+               self.images.append(pil_loader(path1))
+               self.labels.append(label)
+               
+
             
      
   
@@ -64,8 +69,7 @@ class Caltech(VisionDataset):
           through the index
         - Labels should start from 0, so for Caltech you will have lables 0...100 (excluding the background class) 
         '''
-
-    def __makesplit__(self):
+     def __makesplit__(self):
         self.trainsplit=[]
         self.validsplit=[]
         count=0
@@ -76,14 +80,15 @@ class Caltech(VisionDataset):
             else:
                 self.validsplit.append(i)
                 count=0
-    def __trainsplit__(self):
+    
+     def __trainsplit__(self):
         return self.trainsplit
         
        
-    def __validsplit__(self):
+     def __validsplit__(self):
         return self.validsplit
         
-    def __getitem__(self, index):
+     def __getitem__(self, index):
         '''
         __getitem__ should access an element through its index
         Args:
@@ -92,8 +97,8 @@ class Caltech(VisionDataset):
         Returns:
             tuple: (sample, target) where target is class_index of the target class.
         '''
-
-        image, label = self.images[index] # Provide a way to access image and label via index
+        label= self.labels[index]
+        image = self.images[index] # Provide a way to access image and label via index
                            # Image should be a PIL Image
                            # label can be int
 
@@ -103,7 +108,7 @@ class Caltech(VisionDataset):
 
         return image, label
 
-    def __len__(self):
+     def __len__(self):
         '''
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
