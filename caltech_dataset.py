@@ -73,7 +73,7 @@ class Caltech(VisionDataset):
         self.trainsplit=[]
         self.validsplit=[]
         count=0
-        for i in range(0,self.images.size()):
+        for i in range(0,len(self.images)):
             if count<2:
                 self.trainsplit.append(i)
                 count+=1
@@ -113,5 +113,5 @@ class Caltech(VisionDataset):
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
         '''
-        length = self.images.length() # Provide a way to get the length (number of elements) of the dataset
+        length = len(self.images) # Provide a way to get the length (number of elements) of the dataset
         return length
