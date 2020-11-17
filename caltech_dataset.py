@@ -20,13 +20,13 @@ class Caltech(VisionDataset):
 
         self.split = split # This defines the split you are going to use
          
-          # (split files are called 'train.txt' and 'test.txt')
-        label=0
+     label=0
         curlab=""
         self.images=[]
+        self.labels=[]
         if(self.split=='train'):
         
-           f=open("MachineLearning/train.txt")
+           f=open('MachineLearning/train.txt','rb')
            lines= f.readlines()
            for line in lines:
               parts=line.split('/')
@@ -36,7 +36,10 @@ class Caltech(VisionDataset):
                     if curlab!=pars[0]:
                         label=label+1
                         curlab=pars[0]
-              selfe.images.append(pil_loader(line),label)
+              line1=line.split('\n')
+              path1=roo+"/"+line1[0]
+              self.images.append(pil_loader(path1))
+              self.labels.append(label)
         else:
            f=open("MachineLearning/test.txt")
            lines= f.readlines()
