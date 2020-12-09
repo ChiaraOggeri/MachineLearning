@@ -35,7 +35,7 @@ class Caltech(VisionDataset):
         self.categories = os.listdir(self.root)
         self.categories.remove("BACKGROUND_Google")
 
-        for path in open(f"./Caltech101/{self.split}.txt"):
+        for path in open(f"./MachineLearning/{self.split}.txt"):
           path = path.replace("\n", "")
           category = path.split("/")[0]
           if(category != "BACKGROUND_Google"):
